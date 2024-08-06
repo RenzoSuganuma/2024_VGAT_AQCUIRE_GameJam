@@ -31,16 +31,11 @@ public class WallPairGenerator : MonoBehaviour
         StartCoroutine(Wall());
     }
 
-    private void Update()
-    {
-    }
-
     // Update is called once per frame
     private IEnumerator Wall()
     {
         while (true)
         {
-            yield return new WaitForSeconds(_Time);
             float x = transform.position.x;
             float y = Random.Range(_Pos1[0].y, _Pos1[1].y);
             Vector3 pos = new Vector3(x, y, 0);
@@ -49,11 +44,12 @@ public class WallPairGenerator : MonoBehaviour
                 var obj = Instantiate(_WallPrefab, pos, Quaternion.identity);
                 var c = obj.GetComponent<MovingWall>();
                 c.SetDestructionPos(transform.position + _destructionBorder);
+                yield return new WaitForSeconds(_Time);
+            }
+            else
+            {
+                yield return new WaitForSeconds(0.5f);
             }
         }
-    }
-
-    private void FixedUpdate()
-    {
     }
 }

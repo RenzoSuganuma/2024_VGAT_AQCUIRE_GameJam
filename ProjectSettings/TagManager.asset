@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - geton
+  - FlyCollider
+  - JumpCollider
   layers:
   - Default
   - TransparentFX
