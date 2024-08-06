@@ -44,7 +44,7 @@ public class WallPairGenerator : MonoBehaviour
                 var obj = Instantiate(_WallPrefab, pos, Quaternion.identity);
                 var c = obj.GetComponent<MovingWall>();
                 c.SetDestructionPos(transform.position + _destructionBorder);
-                yield return new WaitForSeconds(_Time);
+                yield return new WaitForSeconds(_Time / (_GameSystem.PlayerVelocityMagnitude * 0.1f));
             }
             else
             {

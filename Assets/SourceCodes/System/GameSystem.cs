@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -12,6 +12,9 @@ using UnityEngine.UI;
 /// </summary>
 public sealed class GameSystem : MonoBehaviour
 {
+    [SerializeField, Header("開始時の速度")]
+    private float _startVelo = 1.0f;
+
     [SerializeField, Header("加速度 [m/s^2]")]
     private float _acceleration = 1.0f;
 
@@ -57,6 +60,11 @@ public sealed class GameSystem : MonoBehaviour
     /// プレイヤの移動した距離
     /// </summary>
     public static string PlayerScore;
+
+    /// <summary>
+    /// スコア加算用の変数
+    /// </summary>
+    private float _score = 0f;
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     static void Init()
@@ -117,17 +125,17 @@ public sealed class GameSystem : MonoBehaviour
         GetPlayerVelocity();
 
         var speedMeter = GameObject.Find("SpeedMeter");
-        if(speedMeter is not null)
-        {speedMeter.GetComponent<Text>().text = _velocity.ToString("F2") + " km/h";}
+        if (speedMeter is not null)
+        { speedMeter.GetComponent<Text>().text = _velocity.ToString("F2") + " km/h"; }
         var player = GameObject.FindAnyObjectByType<PlayerController>();
         if (player is not null)
         {
-            var str = (player.transform.position - _playerStartPoint).magnitude
-                .ToString("F5");
+            _score += _velocity * Time.deltaTime;
+            var str = _score.ToString("F2");
 
             var dis = GameObject.Find("DistanceMeter");
-            if(dis is not null)
-            {dis.GetComponent<Text>().text = str + " m";}
+            if (dis is not null)
+            { dis.GetComponent<Text>().text = str + " m"; }
 
             PlayerScore = str;
         }
@@ -172,7 +180,7 @@ public sealed class GameSystem : MonoBehaviour
 
     private void GetPlayerVelocity()
     {
-        _velocity = _acceleration * _elapsedTime; // 後でここは直す
+        _velocity = _startVelo + _acceleration * _elapsedTime; // 後でここは直す
 
         if (_maxVelocity < _velocity)
         {
@@ -241,15 +249,15 @@ public sealed class GameSystem : MonoBehaviour
         {
             _playerEndPoint = player.transform.position;
         }
-        
+
         StartCoroutine(GotoResult());
     }
 
     IEnumerator GotoResult()
     {
         var panel = GameObject.Find("FadingPanel").GetComponent<Animator>();
-        if( panel is not null )
-        {panel.Play("Fade");}
+        if (panel is not null)
+        { panel.Play("Fade"); }
         _eventOnGO.Invoke();
         yield return new WaitForSeconds(1);
         GameObject.FindAnyObjectByType<SceneLoader>().LoadScene("ResultScene");

@@ -11,7 +11,7 @@ public class MovingGround : MonoBehaviour
 
     [SerializeField, Header("壁の動く速度")] float _Speed = 5f;
     GameSystem _gameSystem;
-    private Vector3 _destructionPos;
+    private Vector3 _destructionPos = new (-120f, 0f, 0f);
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +25,7 @@ public class MovingGround : MonoBehaviour
     {
         _velocity = _Speed;
 
-        this.transform.position += new Vector3(_WallMoveVector.x * _Speed * _velocity * Time.deltaTime,
+        this.transform.position += new Vector3(_WallMoveVector.x * _velocity * Time.deltaTime,
             _WallMoveVector.y * _Speed * _velocity * Time.deltaTime,
             _WallMoveVector.z * _Speed * _velocity * Time.deltaTime);
 
