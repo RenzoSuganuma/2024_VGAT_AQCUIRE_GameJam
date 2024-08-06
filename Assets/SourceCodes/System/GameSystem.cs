@@ -199,11 +199,16 @@ public sealed class GameSystem : MonoBehaviour
     /// 次のシーンを読み込む
     /// </summary>
     public void LoadNextScene()
-    {
+    {   
         var scene = SceneManager.GetActiveScene();
         var sceneName = scene.name;
         var loader = GameObject.FindAnyObjectByType<SceneLoader>();
 
+        if (sceneName is "MainScene")
+        {
+            PlayerScore = "";
+        }
+        
         switch (sceneName)
         {
             case "TitleScene":
