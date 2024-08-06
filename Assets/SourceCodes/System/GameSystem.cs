@@ -25,6 +25,8 @@ public sealed class GameSystem : MonoBehaviour
 
     public static GameSystem Instance => _instance;
 
+    public float MaxVelocity => _maxVelocity;
+
     /// <summary>
     /// ポーズ入力が入ったときに呼び出してほしいメソッドはここ
     /// </summary>

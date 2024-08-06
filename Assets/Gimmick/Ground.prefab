@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1966616510864115523}
   - component: {fileID: 4640572888163044425}
   - component: {fileID: 3772082027853720073}
-  - component: {fileID: 57211740470272914}
+  - component: {fileID: 2521112699972724290}
   m_Layer: 0
   m_Name: Ground
   m_TagString: Untagged
@@ -106,7 +106,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &57211740470272914
+--- !u!114 &2521112699972724290
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -115,9 +115,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 8439595968814462018}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 940cdde6d5eb8e24ba4cf54edc37ef6e, type: 3}
+  m_Script: {fileID: 11500000, guid: 355e57d0960805040a9f3204e7cd6493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _WallMoveVector: {x: -1, y: 0, z: 0}
   _Speed: 5
-  _WallDellte: -20
