@@ -10,7 +10,9 @@ public class ResultSysytem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ScoreText.text = GameSystem.PlayerScore;
+        //ScoreText.text = GameSystem.PlayerScore;
+        ScoreText.color = new Color(1f, 1f, 1f, 0f);
+        ScoreText.CrossFadeAlpha(1, 0.1f, false);
     }
 
     // Update is called once per frame
