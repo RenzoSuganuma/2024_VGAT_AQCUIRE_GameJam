@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class TutorialSystem : MonoBehaviour
 {
-    [SerializeField] GameObject SceneLoader;
+    [SerializeField] UnityEvent PressSpace;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,8 +16,8 @@ public class TutorialSystem : MonoBehaviour
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Space)) 
-        { 
-
+        {
+            PressSpace.Invoke();
         }
     }
 }

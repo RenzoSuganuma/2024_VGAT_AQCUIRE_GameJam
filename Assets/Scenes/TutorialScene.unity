@@ -646,6 +646,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1667167952 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3827680788573236516, guid: 686dcea742ce95e4d80d5eb2556ea88a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1024453431}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ead93df07a4c8ab419b48bdb4ab19a70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1761869831
 GameObject:
   m_ObjectHideFlags: 0
@@ -675,7 +687,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b378cbb5f88f20046963ae5aa454f69b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneLoader: {fileID: 0}
+  PressSpace:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1667167952}
+        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
+        m_MethodName: LoadScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: MainScene
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!4 &1761869833
 Transform:
   m_ObjectHideFlags: 0

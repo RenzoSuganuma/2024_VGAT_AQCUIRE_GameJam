@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class TitleSystem : MonoBehaviour
 {
     [SerializeField] GameObject CreditPanel;
-    [SerializeField] AudioClip ButtonDecide;
+    [SerializeField] AudioSource ButtonDecide;
     AudioSource _as;
     int _buttonIndex;
     int _delta;
@@ -60,6 +60,6 @@ public class TitleSystem : MonoBehaviour
 
     public void PlayButtonDecide()
     {
-        AudioSource.PlayClipAtPoint(ButtonDecide,transform.position);
+        ButtonDecide.Play();
     }
 }
