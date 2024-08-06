@@ -37,7 +37,7 @@ public sealed class GameSystem : MonoBehaviour
     /// </summary>
     public event Action ToDoOnResume;
 
-    private bool _isPausing = false;
+    private bool _isPausing = true;
 
     public bool IsPausing => _isPausing;
 
@@ -81,12 +81,25 @@ public sealed class GameSystem : MonoBehaviour
                 }
             }
         }
+
+        StartCoroutine(nameof(StartCountDown), 3f);
     }
 
     private void Update()
     {
         CheckPauseInput();
         GetPlayerVelocity();
+    }
+
+    IEnumerator StartCountDown(int waitingTime)
+    {
+        for (int i = 0; i < waitingTime; i++)
+        {
+            yield return new WaitForSeconds(1);
+            Debug.Log(i + 1);
+        }
+
+        _isPausing = false;
     }
 
     private void CheckPauseInput()
