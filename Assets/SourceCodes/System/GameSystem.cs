@@ -9,7 +9,6 @@ using UnityEngine.UI;
 
 /// 最初のよーいどんの実装
 /// ゲームオーバーの実装
-
 /// <summary>
 ///  ゲームシステムクラス
 /// </summary>
@@ -44,6 +43,9 @@ public sealed class GameSystem : MonoBehaviour
 
     private float _velocity = 1.0f;
 
+    private Vector3 _playerStartPoint;
+    private Vector3 _playerEndPoint;
+
     /// <summary>
     /// 速度ベクトルの大きさ
     /// </summary>
@@ -63,8 +65,8 @@ public sealed class GameSystem : MonoBehaviour
         {
             _instance = this;
             this.gameObject.name = this.gameObject.name + " 【Saved Instance】 ";
-            // Debug.Log($"instance {_instance == this}");
         }
+
         // DDOL 登録
         GameObject.DontDestroyOnLoad(this.gameObject);
     }
@@ -84,8 +86,14 @@ public sealed class GameSystem : MonoBehaviour
         }
 
         StartCoroutine(nameof(StartCountDown), 3f);
-        
+
         SetupBackGroundAudio();
+
+        var player = GameObject.FindAnyObjectByType<PlayerController>();
+        if (player is not null)
+        {
+            _playerStartPoint = player.transform.position;
+        }
     }
 
     private void SetupBackGroundAudio()
@@ -101,6 +109,15 @@ public sealed class GameSystem : MonoBehaviour
     {
         CheckPauseInput();
         GetPlayerVelocity();
+
+        GameObject.Find("SpeedMeter").GetComponent<Text>().text = _velocity.ToString("F2") + " km/h";
+        var player = GameObject.FindAnyObjectByType<PlayerController>();
+        if (player is not null)
+        {
+            GameObject.Find("DistanceMeter").GetComponent<Text>().text =
+                (player.transform.position - _playerStartPoint).magnitude
+                .ToString("F2") + " m";
+        }
     }
 
     IEnumerator StartCountDown(int waitingTime)
@@ -108,7 +125,6 @@ public sealed class GameSystem : MonoBehaviour
         for (int i = 0; i < waitingTime; i++)
         {
             yield return new WaitForSeconds(1);
-            // Debug.Log(i + 1);
         }
 
         _isPausing = false;
@@ -201,6 +217,9 @@ public sealed class GameSystem : MonoBehaviour
     /// </summary>
     public void NotifyPlayerIsDeath()
     {
-        
+        _isPausing = true;
+        _playerEndPoint = GameObject.FindAnyObjectByType<PlayerController>().transform.position;
+
+        GameObject.FindAnyObjectByType<SceneLoader>().LoadScene("ResultScene");
     }
 }
