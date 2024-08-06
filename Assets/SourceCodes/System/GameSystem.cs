@@ -94,12 +94,12 @@ public sealed class GameSystem : MonoBehaviour
     {
         CheckPauseInput();
         GetPlayerVelocity();
-        _isJumping = Input.GetKeyDown(KeyCode.Space);
+        _isJumping = Input.GetButtonDown("Jump");
     }
 
     private void CheckPauseInput()
     {
-        if (Input.GetKeyDown(KeyCode.Tab)) // 仮の一時停止キー
+        if (Input.GetButtonDown("PauseResume")) // 仮の一時停止キー
         {
             _isPausing = !_isPausing;
             if (_isPausing)
