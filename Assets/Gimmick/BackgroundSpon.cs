@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WollSpon : MonoBehaviour
+public class BackgroundSpon : MonoBehaviour
 {
     [SerializeField] GameObject _Woll;
     [SerializeField] float _Time = 3f;
