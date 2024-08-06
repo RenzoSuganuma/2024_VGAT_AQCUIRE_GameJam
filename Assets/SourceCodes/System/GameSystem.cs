@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,6 +15,10 @@ public sealed class GameSystem : MonoBehaviour
 
     [SerializeField, Header("速度の最大値 [m/s]")]
     private float _maxVelocity = 10.0f;
+
+    private static GameSystem _instance = null;
+
+    public static GameSystem Instance => _instance;
 
     /// <summary>
     /// ポーズ入力が入ったときに呼び出してほしいメソッドはここ
@@ -45,14 +50,35 @@ public sealed class GameSystem : MonoBehaviour
 
     private float _elapsedTime = 0f;
 
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+    static void Init()
+    {
+        _instance = null;
+    }
+
     private void Awake()
     {
-        // DDOL 登録
-        GameObject.DontDestroyOnLoad(this.gameObject);
+        if (_instance is null)
+        {
+            _instance = this;
+            // DDOL 登録
+            GameObject.DontDestroyOnLoad(this.gameObject);
+        }
     }
 
     private void Start()
     {
+        var instanceArray = GameObject.FindObjectsOfType<GameSystem>();
+        if (instanceArray.Length > 1)
+        {
+            foreach (var item in instanceArray)
+            {
+                if (item != _instance)
+                {
+                    Destroy(item.gameObject);
+                }
+            }
+        }
     }
 
     private void Update()
