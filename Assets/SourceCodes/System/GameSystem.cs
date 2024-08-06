@@ -84,6 +84,17 @@ public sealed class GameSystem : MonoBehaviour
         }
 
         StartCoroutine(nameof(StartCountDown), 3f);
+        
+        SetupBackGroundAudio();
+    }
+
+    private void SetupBackGroundAudio()
+    {
+        gameObject.AddComponent<AudioSource>();
+        var audioSources = GetComponent<AudioSource>();
+        audioSources.loop = true;
+        audioSources.clip = Resources.Load<AudioClip>("Sounds/BGM");
+        audioSources.Play();
     }
 
     private void Update()
@@ -183,5 +194,13 @@ public sealed class GameSystem : MonoBehaviour
                 loader.LoadScene("TitleScene");
                 break;
         }
+    }
+
+    /// <summary>
+    /// プレイヤ死亡時にこれを呼び出す
+    /// </summary>
+    public void NotifyPlayerIsDeath()
+    {
+        
     }
 }
