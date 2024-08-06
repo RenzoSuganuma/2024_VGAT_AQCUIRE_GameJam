@@ -2,22 +2,43 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class TitleSystem : MonoBehaviour
 {
     [SerializeField] GameObject CreditPanel;
-    [SerializeField] Button CreditExit;
+    [SerializeField] AudioClip ButtonDecide;
+    AudioSource _as;
+    int _buttonIndex;
+    int _delta;
     // Start is called before the first frame update
     void Start()
     {
         CreditPanel.SetActive(false);
+        _buttonIndex = 1;
+
+        _as = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            if (_buttonIndex > 0)
+            {
+                _buttonIndex--;
+                _as.Play();
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            if (_buttonIndex < 2) 
+            {
+                _buttonIndex++;
+                _as.Play();
+            }
+        }
     }
 
     
@@ -35,5 +56,10 @@ public class TitleSystem : MonoBehaviour
         UnityEditor.EditorApplication.isPlaying = false;
 
         Application.Quit();
+    }
+
+    public void PlayButtonDecide()
+    {
+        AudioSource.PlayClipAtPoint(ButtonDecide,transform.position);
     }
 }
