@@ -19,14 +19,14 @@ public class GroundGenerator : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-
+        _Timer = _Time * _GameSystem.PlayerVelocityMagnitude * Time.fixedDeltaTime;
     }
 
     private IEnumerator Generate()
     {
         while (true)
         {
-            yield return new WaitForSeconds(_Time);
+            yield return new WaitForSeconds(_Timer);
             if (!_GameSystem.IsPausing)
             {
                 Instantiate(_Woll, this.transform.position, Quaternion.identity);

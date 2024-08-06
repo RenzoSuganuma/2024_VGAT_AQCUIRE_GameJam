@@ -36,7 +36,7 @@ public class WallPairGenerator : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (this.transform.position.x >= _Dellte)
+        if (this.transform.position.x <= _Dellte)
         {
             Destroy(this.gameObject);
         }

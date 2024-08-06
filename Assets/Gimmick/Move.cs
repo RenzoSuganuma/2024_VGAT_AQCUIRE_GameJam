@@ -28,7 +28,7 @@ public class Move : MonoBehaviour
         {
             _playerVelocity = _gameSystem.PlayerVelocityMagnitude;
             this.transform.position += new Vector3(_WallMoveVector.x * _Speed  *  _playerVelocity * Time.deltaTime, _WallMoveVector.y * _Speed * _playerVelocity * Time.deltaTime, _WallMoveVector.z * _Speed * _playerVelocity * Time.deltaTime);
-            if (this.transform.position.x >= _WallDellte)
+            if (this.transform.position.x <= _WallDellte)
             {
                 Destroy(this.gameObject);
             }

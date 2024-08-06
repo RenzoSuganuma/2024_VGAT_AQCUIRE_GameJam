@@ -120,4 +120,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _WallMoveVector: {x: -1, y: 0, z: 0}
   _Speed: 5
-  _WallDellte: 20
+  _WallDellte: -20
