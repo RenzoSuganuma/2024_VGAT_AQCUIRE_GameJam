@@ -16,12 +16,13 @@ public sealed class PlayerController : MonoBehaviour
     // ギミックから
     [SerializeField, Header("飛ぶときにアウトな壁のタグ")] private string _flyGOTag = "";
     [SerializeField, Header("跳ぶときにアウトな壁のタグ")] private string _jumpGOTag = "";
+    [SerializeField, Header("地面のタグ")] private string _groundTag = "Ground";
     
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private AudioClip _flyAudioClip;
     [SerializeField] private AudioClip _jumpAudioClip;
     [SerializeField] private AudioClip _clashAudioClip;
-    [SerializeField] private AudioClip _changeAudioClip; // ToDo:命名考える＆予兆の音を入れる
+    [SerializeField] private AudioClip _changeAudioClip;
     
     private Rigidbody _rb;
     private GameSystem _gameSystem;
@@ -41,13 +42,12 @@ public sealed class PlayerController : MonoBehaviour
         _gameSystem = GameObject.FindObjectOfType<GameSystem>().GetComponent<GameSystem>();
         _audioSource = GetComponent<AudioSource>();
         _animator = GetComponentInChildren<Animator>();
-        // ToDo:ランダムに飛ぶと跳ぶを変更
+        // ランダムに飛ぶと跳ぶを変更
         StartCoroutine("ChangePlayerMoveState");
         if (_flyGOTag is null || _jumpGOTag is null)
         {
             Debug.LogWarning("ゲームオーバー用のタグがnullです");
         }
-        //_animator.Play();
     }
 
     private void FixedUpdate()
@@ -61,7 +61,7 @@ public sealed class PlayerController : MonoBehaviour
         }
         
         PlayerMove();
-        // ポーズしていないときは動ける
+        // ポーズしていない時動ける
         if (_gameSystem is not null && !_gameSystem.IsPausing)
         {
             PlayerMove();
@@ -70,9 +70,23 @@ public sealed class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        _isKeyDown = Input.GetKeyDown(KeyCode.Space);
-        _isKeyUp = Input.GetKeyUp(KeyCode.Space);
-        InputJump();
+        // ポーズ中は入力を受け付けない
+        //if (_gameSystem.IsPausing)
+        //{
+        //    _rb.constraints = RigidbodyConstraints.FreezeAll;
+        //}
+        //else
+        //{
+        // _isKeyDown = Input.GetKeyDown(KeyCode.Space);
+        // _isKeyUp = Input.GetKeyUp(KeyCode.Space);
+        // InputJump();
+        //}
+        if (!_gameSystem.IsPausing)
+        {
+            _isKeyDown = Input.GetKeyDown(KeyCode.Space);
+            _isKeyUp = Input.GetKeyUp(KeyCode.Space);
+            InputJump();
+        }
     }
 
     private void PlayerMove()
@@ -97,7 +111,7 @@ public sealed class PlayerController : MonoBehaviour
         if (_isKeyDown)
         {
             //Debug.Log("F");
-            _rb.velocity = new Vector3(0, _flyPower, 0); // ToDo:
+            _rb.velocity = new Vector3(0, _flyPower, 0);
             _audioSource.PlayOneShot(_flyAudioClip);
         }
     }
@@ -107,7 +121,6 @@ public sealed class PlayerController : MonoBehaviour
     /// </summary>
     private void JumpPlayerMove()
     {
-        //InputJump();
         if (_isInputJump && transform.position.y < _y)
         {
             _canJump = true;
@@ -124,7 +137,7 @@ public sealed class PlayerController : MonoBehaviour
         
         if (_canJump)
         {
-            _rb.AddForce(Vector3.up * _jumpPower, ForceMode.Impulse); // ToDo
+            _rb.AddForce(Vector3.up * _jumpPower, ForceMode.Impulse);
             _isGrounded = false;
             _canJump = false;
         }
@@ -161,9 +174,13 @@ public sealed class PlayerController : MonoBehaviour
     private void OnCollisionEnter(Collision other)
     {
         string tag = other.gameObject.tag;
-        if (CurrentMoveState == PlayerMoveState.Jump)
+        if (CurrentMoveState == PlayerMoveState.Fly && tag == _groundTag)
         {
-            if (tag == "Ground")
+            GameOver();
+        }
+        else if (CurrentMoveState == PlayerMoveState.Jump)
+        {
+            if (tag == _groundTag)
             {
                 _isGrounded = true;
             }            
@@ -201,13 +218,8 @@ public sealed class PlayerController : MonoBehaviour
     /// <returns></returns>
     IEnumerator ChangePlayerMoveState()
     {
-        var time = 0f;
         while (true)
         {
-            // ２秒前に予兆(アニメーションと音)
-            //_currentMoveState = PlayerMoveState.Fly; // ToDo:ここいらないかも
-            
-                        
             _animator.SetBool("ChangeBefore", false);
             _audioSource.Stop();
             _currentMoveState = PlayerMoveState.Fly;
@@ -229,13 +241,6 @@ public sealed class PlayerController : MonoBehaviour
             _audioSource.PlayOneShot(_changeAudioClip);
             Debug.Log($"{_time}秒後に状態をFlyに切り替えます");
             yield return new WaitForSeconds(_time);
-            
-            /*_animator.SetBool("ChangeBefore", false);
-            _currentMoveState = PlayerMoveState.Fly;
-            Debug.Log("Flyに変更");
-            yield return new WaitForSeconds(Random.Range(_minChangeTime, _maxChangeTime - _time));*/
         }
     }
-    // ToDo:当たったらダメなところはトリガー
-    // 設置はコライダー
 }
