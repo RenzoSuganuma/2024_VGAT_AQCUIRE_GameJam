@@ -195,4 +195,12 @@ public sealed class GameSystem : MonoBehaviour
                 break;
         }
     }
+
+    /// <summary>
+    /// プレイヤ死亡時にこれを呼び出す
+    /// </summary>
+    public void NotifyPlayerIsDeath()
+    {
+        
+    }
 }
