@@ -9,7 +9,6 @@ public class GroundGenerator : MonoBehaviour
     [SerializeField] GameObject _Wall;
     [SerializeField] float _Time = 3f;
     [SerializeField] private Vector3 _destructionBorder;
-    float _Timer = 0;
     GameSystem _GameSystem;
 
     private void OnDrawGizmos()
@@ -25,13 +24,11 @@ public class GroundGenerator : MonoBehaviour
         _GameSystem = GameObject.FindAnyObjectByType<GameSystem>();
 
         StartCoroutine(Generate());
-
-        _Timer = _Time;
     }
 
     private void Update()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -43,13 +40,10 @@ public class GroundGenerator : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(_Timer);
-            if (!_GameSystem.IsPausing)
-            {
-                var obj = Instantiate(_Wall, this.transform.position, Quaternion.identity);
-                var c = obj.GetComponent<MovingGround>();
-                c.SetDestructionPos(transform.position + _destructionBorder);
-            }
+            var obj = Instantiate(_Wall, this.transform.position, Quaternion.identity);
+            var c = obj.GetComponent<MovingGround>();
+            c.SetDestructionPos(transform.position + _destructionBorder);
+            yield return new WaitForSeconds(_Time);
         }
     }
 }
