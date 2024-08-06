@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class MoveWall : MonoBehaviour
+public class Move : MonoBehaviour
 {
     float _playerVelocity = 0f;
     [SerializeField, Header("壁の動く方向 *動かしたい方向に１を入れてください")] Vector3 _WallMoveVector = Vector3.zero;
