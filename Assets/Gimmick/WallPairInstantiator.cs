@@ -19,7 +19,7 @@ public class WallPairInstantiator : MonoBehaviour
     {
         if (_GameSystem is not null && !_GameSystem.IsPausing)
         {
-            GameObject childObject = Instantiate(_WallSpon[Random.Range(0, _WallSpon.Length)], this.transform.position);
+            GameObject childObject = Instantiate(_WallSpon[Random.Range(0, _WallSpon.Length)], this.transform);
             childObject.transform.localPosition = new Vector3(0, 2, 0);
             childObject.transform.localRotation = Quaternion.identity;
             childObject.transform.localScale = new Vector3(1, 1, 1);
