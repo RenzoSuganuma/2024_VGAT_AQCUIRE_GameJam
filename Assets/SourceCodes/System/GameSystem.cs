@@ -7,8 +7,6 @@ using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-/// 最初のよーいどんの実装
-/// ゲームオーバーの実装
 /// <summary>
 ///  ゲームシステムクラス
 /// </summary>
@@ -56,7 +54,7 @@ public sealed class GameSystem : MonoBehaviour
     /// <summary>
     /// プレイヤの移動した距離
     /// </summary>
-    public static string PlayerScore; 
+    public static string PlayerScore;
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     static void Init()
@@ -116,14 +114,18 @@ public sealed class GameSystem : MonoBehaviour
         CheckPauseInput();
         GetPlayerVelocity();
 
-        GameObject.Find("SpeedMeter").GetComponent<Text>().text = _velocity.ToString("F2") + " km/h";
+        var speedMeter = GameObject.Find("SpeedMeter");
+        if(speedMeter is not null)
+        {speedMeter.GetComponent<Text>().text = _velocity.ToString("F2") + " km/h";}
         var player = GameObject.FindAnyObjectByType<PlayerController>();
         if (player is not null)
         {
             var str = (player.transform.position - _playerStartPoint).magnitude
-                .ToString("F2");
-            
-            GameObject.Find("DistanceMeter").GetComponent<Text>().text = str + " m";
+                .ToString("F5");
+
+            var dis = GameObject.Find("DistanceMeter");
+            if(dis is not null)
+            {dis.GetComponent<Text>().text = str + " m";}
 
             PlayerScore = str;
         }
@@ -199,7 +201,7 @@ public sealed class GameSystem : MonoBehaviour
     /// 次のシーンを読み込む
     /// </summary>
     public void LoadNextScene()
-    {   
+    {
         var scene = SceneManager.GetActiveScene();
         var sceneName = scene.name;
         var loader = GameObject.FindAnyObjectByType<SceneLoader>();
@@ -208,7 +210,7 @@ public sealed class GameSystem : MonoBehaviour
         {
             PlayerScore = "";
         }
-        
+
         switch (sceneName)
         {
             case "TitleScene":
@@ -232,8 +234,21 @@ public sealed class GameSystem : MonoBehaviour
     public void NotifyPlayerIsDeath()
     {
         _isPausing = true;
-        _playerEndPoint = GameObject.FindAnyObjectByType<PlayerController>().transform.position;
+        var player = GameObject.FindAnyObjectByType<PlayerController>();
+        if (player is not null)
+        {
+            _playerEndPoint = player.transform.position;
+        }
+        
+        StartCoroutine(GotoResult());
+    }
 
+    IEnumerator GotoResult()
+    {
+        var panel = GameObject.Find("FadingPanel").GetComponent<Animator>();
+        if( panel is not null )
+        {panel.Play("Fade");}
+        yield return new WaitForSeconds(1);
         GameObject.FindAnyObjectByType<SceneLoader>().LoadScene("ResultScene");
     }
 }
