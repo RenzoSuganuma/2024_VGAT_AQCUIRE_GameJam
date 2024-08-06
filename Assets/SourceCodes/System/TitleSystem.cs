@@ -18,12 +18,8 @@ public class TitleSystem : MonoBehaviour
         
     }
 
-    public void LoadScene(string sceneName)
-    {
-        SceneManager.LoadScene(sceneName);
-    }
-
-    public void PanalActive()
+   
+    public void ActivatePanel()
     {
         CreditPanel.SetActive(true);
     }
