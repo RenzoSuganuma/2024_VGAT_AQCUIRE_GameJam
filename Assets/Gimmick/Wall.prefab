@@ -151,8 +151,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 940cdde6d5eb8e24ba4cf54edc37ef6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _WallMoveVector: {x: 1, y: 0, z: 0}
-  _Speed: -5
+  _WallMoveVector: {x: -1, y: 0, z: 0}
+  _Speed: 5
   _WallDellte: 20
 --- !u!1 &6543364620216748263
 GameObject:
