@@ -7,6 +7,7 @@ public class TitleSystem : MonoBehaviour
 {
     [SerializeField] GameObject CreditPanel;
     [SerializeField] AudioSource ButtonDecide;
+    [SerializeField] GameObject DDOLSoundPrefab;
     AudioSource _as;
     int _buttonIndex;
     int _delta;
@@ -61,5 +62,10 @@ public class TitleSystem : MonoBehaviour
     public void PlayButtonDecide()
     {
         ButtonDecide.Play();
+    }
+
+    public void PlayDDOLSound()
+    {
+        Instantiate(DDOLSoundPrefab);
     }
 }
