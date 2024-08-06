@@ -727,6 +727,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 563056664547318759, guid: fa9d246d55494604ba36483388898633,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 122
+      objectReference: {fileID: 0}
     - target: {fileID: 1448518277920331317, guid: fa9d246d55494604ba36483388898633,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -777,10 +782,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4205022179185183582, guid: fa9d246d55494604ba36483388898633,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4205022179185183582, guid: fa9d246d55494604ba36483388898633,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5137674909155856472, guid: fa9d246d55494604ba36483388898633,
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8250629079246443247, guid: fa9d246d55494604ba36483388898633,
+        type: 3}
+      propertyPath: _currentMoveState
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

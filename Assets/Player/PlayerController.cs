@@ -19,9 +19,10 @@ public sealed class PlayerController : MonoBehaviour
     [SerializeField] private AudioClip _flyAudioClip;
     [SerializeField] private AudioClip _jumpAudioClip;
     [SerializeField] private AudioClip _clashAudioClip;
-
+    
     private Rigidbody _rb;
     private GameSystem _gameSystem;
+    private Animator _animator;
     private bool _isGrounded = false;
     private bool _canJump = false;
     private bool _isInputJump = false;
@@ -31,9 +32,10 @@ public sealed class PlayerController : MonoBehaviour
     private void Start()
     {
         _rb = GetComponent<Rigidbody>();
-        //Debug.Log(_currentMoveState);
+        Debug.Log(_currentMoveState);
         _gameSystem = GameObject.FindObjectOfType<GameSystem>().GetComponent<GameSystem>();
         _audioSource = GetComponent<AudioSource>();
+        _animator = GetComponent<Animator>();
         // ランダムに飛ぶと跳ぶを変更
         //StartCoroutine("ChangePlayerMoveState");
         if (_flyGOTag is null || _jumpGOTag is null)
