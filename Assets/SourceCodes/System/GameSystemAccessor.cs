@@ -9,18 +9,11 @@ using UnityEngine;
 /// </summary>
 public class GameSystemAccessor : MonoBehaviour
 {
-    private GameSystem _gameSystem;
-    
-    private void Start()
-    {
-        _gameSystem = GameSystem.Instance;
-    }
-
     /// <summary>
     /// システムのシーン読み込みメソッドを呼び出す
     /// </summary>
     public void CallLoadNextScene()
     {
-        _gameSystem.LoadNextScene();
+        GameObject.FindAnyObjectByType<GameSystem>().LoadNextScene();
     }
 }

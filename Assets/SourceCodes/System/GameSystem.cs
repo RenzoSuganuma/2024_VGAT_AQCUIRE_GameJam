@@ -3,7 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+
+/// 最初のよーいどんの実装
+/// ゲームオーバーの実装
 
 /// <summary>
 ///  ゲームシステムクラス
@@ -16,7 +20,10 @@ public sealed class GameSystem : MonoBehaviour
     [SerializeField, Header("速度の最大値 [m/s]")]
     private float _maxVelocity = 10.0f;
 
-    private static GameSystem _instance = null;
+    [SerializeField, Header("ゲームオーバーのイベント")]
+    private UnityEvent _eventOnGO;
+
+    private static GameSystem _instance;
 
     public static GameSystem Instance => _instance;
 
@@ -61,9 +68,11 @@ public sealed class GameSystem : MonoBehaviour
         if (_instance is null)
         {
             _instance = this;
-            // DDOL 登録
-            GameObject.DontDestroyOnLoad(this.gameObject);
+            this.gameObject.name = this.gameObject.name + " 【Saved Instance】 ";
+            // Debug.Log($"instance {_instance == this}");
         }
+        // DDOL 登録
+        GameObject.DontDestroyOnLoad(this.gameObject);
     }
 
     private void Start()
