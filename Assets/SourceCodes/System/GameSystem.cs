@@ -24,10 +24,6 @@ public sealed class GameSystem : MonoBehaviour
     [SerializeField, Header("ゲームオーバーのイベント")]
     private UnityEvent _eventOnGO;
 
-    private static GameSystem _instance;
-
-    public static GameSystem Instance => _instance;
-
     public float MaxVelocity => _maxVelocity;
 
     /// <summary>
@@ -66,40 +62,12 @@ public sealed class GameSystem : MonoBehaviour
     /// </summary>
     private float _score = 0f;
 
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
-    static void Init()
-    {
-        _instance = null;
-        PlayerScore = "";
-    }
+    private bool _isGameOver = false;
 
-    private void Awake()
-    {
-        if (_instance is null)
-        {
-            _instance = this;
-            this.gameObject.name = this.gameObject.name + " 【Saved Instance】 ";
-        }
-
-        // DDOL 登録
-        GameObject.DontDestroyOnLoad(this.gameObject);
-    }
 
     private void Start()
     {
-        var instanceArray = GameObject.FindObjectsOfType<GameSystem>();
-        if (instanceArray.Length > 1)
-        {
-            foreach (var item in instanceArray)
-            {
-                if (item != _instance)
-                {
-                    Destroy(item.gameObject);
-                }
-            }
-        }
-
-        StartCoroutine(nameof(StartCountDown), 3f);
+        StartCoroutine(WaitPressSpaceKey());
 
         SetupBackGroundAudio();
 
@@ -121,7 +89,9 @@ public sealed class GameSystem : MonoBehaviour
 
     private void Update()
     {
-        CheckPauseInput();
+        if (_isPausing) return;
+
+
         GetPlayerVelocity();
 
         var speedMeter = GameObject.Find("SpeedMeter");
@@ -141,36 +111,19 @@ public sealed class GameSystem : MonoBehaviour
         }
     }
 
-    IEnumerator StartCountDown(int waitingTime)
+    IEnumerator WaitPressSpaceKey()
     {
-        for (int i = 0; i < waitingTime; i++)
-        {
-            yield return new WaitForSeconds(1);
-        }
+        var text = GameObject.Find("GameStateText");
+        if (text is not null)
+        { text.GetComponent<Text>().text = "Press SPACE to Start"; }
+
+        // Spaceが押されるまで待機する
+        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
+
+        if (text is not null)
+        { text.GetComponent<Text>().text = ""; }
 
         _isPausing = false;
-    }
-
-    private void CheckPauseInput()
-    {
-        if (Input.GetButtonDown("PauseResume")) // 仮の一時停止キー
-        {
-            _isPausing = !_isPausing;
-            if (_isPausing)
-            {
-                if (ToDoOnPause is not null)
-                {
-                    ToDoOnPause(); // pause
-                }
-            }
-            else
-            {
-                if (ToDoOnResume is not null)
-                {
-                    ToDoOnResume(); // resume
-                }
-            }
-        }
     }
 
     private void FixedUpdate()
@@ -243,7 +196,18 @@ public sealed class GameSystem : MonoBehaviour
     /// </summary>
     public void NotifyPlayerIsDeath()
     {
+        if (_isGameOver)
+        {
+            return;
+        }
+
+        _isGameOver = true;
         _isPausing = true;
+
+        var text = GameObject.Find("GameStateText");
+        if (text is not null)
+        { text.GetComponent<Text>().text = "GAME OVER !!"; }
+
         var player = GameObject.FindAnyObjectByType<PlayerController>();
         if (player is not null)
         {
@@ -255,9 +219,6 @@ public sealed class GameSystem : MonoBehaviour
 
     IEnumerator GotoResult()
     {
-        var panel = GameObject.Find("FadingPanel").GetComponent<Animator>();
-        if (panel is not null)
-        { panel.Play("Fade"); }
         _eventOnGO.Invoke();
         yield return new WaitForSeconds(1);
         GameObject.FindAnyObjectByType<SceneLoader>().LoadScene("ResultScene");
