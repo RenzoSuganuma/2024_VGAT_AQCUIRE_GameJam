@@ -248,6 +248,7 @@ public sealed class GameSystem : MonoBehaviour
         var panel = GameObject.Find("FadingPanel").GetComponent<Animator>();
         if( panel is not null )
         {panel.Play("Fade");}
+        _eventOnGO.Invoke();
         yield return new WaitForSeconds(1);
         GameObject.FindAnyObjectByType<SceneLoader>().LoadScene("ResultScene");
     }
