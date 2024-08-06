@@ -102,12 +102,14 @@ MonoBehaviour:
   _minChangeTime: 3
   _maxChangeTime: 10
   _y: 0.5
-  _flyGOTag: Player
-  _jumpGOTag: Finish
+  _time: 2
+  _flyGOTag: FlyCollider
+  _jumpGOTag: JumpCollider
   _audioSource: {fileID: 1559021537723657700}
   _flyAudioClip: {fileID: 8300000, guid: 6cea0d7e83a908a4991d831a84c1f6a9, type: 3}
   _jumpAudioClip: {fileID: 8300000, guid: 6dd98b6fee5f4e24aa31458f1acf3c75, type: 3}
   _clashAudioClip: {fileID: 8300000, guid: 96351bbd22c2cb24fae1ed7bb1a3a79c, type: 3}
+  _changeAudioClip: {fileID: 8300000, guid: 0efeba0be33cbad4d86cba6bb269448b, type: 3}
 --- !u!82 &1559021537723657700
 AudioSource:
   m_ObjectHideFlags: 0
