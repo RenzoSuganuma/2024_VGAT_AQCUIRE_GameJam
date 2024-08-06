@@ -1465,6 +1465,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: GS
       objectReference: {fileID: 0}
+    - target: {fileID: 2141255273585024477, guid: 9b32cf0287457fd4b8507a90c5ba7848,
+        type: 3}
+      propertyPath: _eventOnGO.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2141255273585024477, guid: 9b32cf0287457fd4b8507a90c5ba7848,
+        type: 3}
+      propertyPath: _eventOnGO.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8122273673786816895, guid: 9b32cf0287457fd4b8507a90c5ba7848,
         type: 3}
       propertyPath: m_LocalPosition.x
