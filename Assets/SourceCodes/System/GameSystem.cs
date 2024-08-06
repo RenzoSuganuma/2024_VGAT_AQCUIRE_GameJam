@@ -5,6 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 /// 最初のよーいどんの実装
 /// ゲームオーバーの実装
@@ -96,7 +97,7 @@ public sealed class GameSystem : MonoBehaviour
         for (int i = 0; i < waitingTime; i++)
         {
             yield return new WaitForSeconds(1);
-            Debug.Log(i + 1);
+            // Debug.Log(i + 1);
         }
 
         _isPausing = false;
@@ -150,26 +151,36 @@ public sealed class GameSystem : MonoBehaviour
     }
 
     /// <summary>
+    /// 移動した距離を渡されるベクトルで計算して小数点以下５ｹﾀでTextへ表示する
+    /// </summary>
+    public void DisplayMovedDistance(Vector3 start, Vector3 end, Text text)
+    {
+        var d = (end - start).magnitude;
+        text.text = d.ToString("F5");
+    }
+
+    /// <summary>
     /// 次のシーンを読み込む
     /// </summary>
     public void LoadNextScene()
     {
         var scene = SceneManager.GetActiveScene();
         var sceneName = scene.name;
+        var loader = GameObject.FindAnyObjectByType<SceneLoader>();
 
         switch (sceneName)
         {
             case "TitleScene":
-                SceneManager.LoadScene("TutorialScene", LoadSceneMode.Single);
+                loader.LoadScene("TutorialScene");
                 break;
             case "TutorialScene":
-                SceneManager.LoadScene("MainScene", LoadSceneMode.Single);
+                loader.LoadScene("MainScene");
                 break;
             case "MainScene":
-                SceneManager.LoadScene("ResultScene", LoadSceneMode.Single);
+                loader.LoadScene("ResultScene");
                 break;
             case "ResultScene":
-                SceneManager.LoadScene("TitleScene", LoadSceneMode.Single);
+                loader.LoadScene("TitleScene");
                 break;
         }
     }
