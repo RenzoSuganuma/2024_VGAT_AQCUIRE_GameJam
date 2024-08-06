@@ -53,10 +53,16 @@ public sealed class GameSystem : MonoBehaviour
 
     private float _elapsedTime = 0f;
 
+    /// <summary>
+    /// プレイヤの移動した距離
+    /// </summary>
+    public static string PlayerScore; 
+
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     static void Init()
     {
         _instance = null;
+        PlayerScore = "";
     }
 
     private void Awake()
@@ -114,9 +120,12 @@ public sealed class GameSystem : MonoBehaviour
         var player = GameObject.FindAnyObjectByType<PlayerController>();
         if (player is not null)
         {
-            GameObject.Find("DistanceMeter").GetComponent<Text>().text =
-                (player.transform.position - _playerStartPoint).magnitude
-                .ToString("F2") + " m";
+            var str = (player.transform.position - _playerStartPoint).magnitude
+                .ToString("F2");
+            
+            GameObject.Find("DistanceMeter").GetComponent<Text>().text = str + " m";
+
+            PlayerScore = str;
         }
     }
 
