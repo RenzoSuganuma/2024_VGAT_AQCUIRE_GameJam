@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class TutorialSystem : MonoBehaviour
 {
     [SerializeField] UnityEvent PressSpace;
+    [SerializeField] GameObject SoundPrefab;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,5 +20,10 @@ public class TutorialSystem : MonoBehaviour
         {
             PressSpace.Invoke();
         }
+    }
+
+    public void PlaySound()
+    {
+        Instantiate(SoundPrefab);
     }
 }
