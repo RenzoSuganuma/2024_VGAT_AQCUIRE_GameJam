@@ -12,7 +12,6 @@ using UnityEngine.UI;
 public class SceneLoader : MonoBehaviour
 {
     [SerializeField] Image Panel;
-    float _fadeTime = 1f;
     private void Start()
     {
         if(Panel != null)
