@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ResultSysytem : MonoBehaviour
 {
     [SerializeField] Text ScoreText;
+    [SerializeField] GameObject SoundPrefab;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,5 +17,10 @@ public class ResultSysytem : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void PlaySound()
+    {
+        Instantiate(SoundPrefab);
     }
 }
