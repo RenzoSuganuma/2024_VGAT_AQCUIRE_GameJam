@@ -17,10 +17,12 @@ public class WallPairInstantiator : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Instantiate(_WallSpon[Random.Range(1, _WallSpon.Length)], new Vector3(_SponPosition.x, _SponPosition.y, _SponPosition.z), Quaternion.identity);
         if (_GameSystem is not null && !_GameSystem.IsPausing)
         {
-            Instantiate(_WallSpon[Random.Range(1, _WallSpon.Length)], new Vector3(_SponPosition.x, _SponPosition.y, _SponPosition.z), Quaternion.identity);
+            GameObject childObject = Instantiate(_WallSpon[Random.Range(0, _WallSpon.Length)], this.transform.position);
+            childObject.transform.localPosition = new Vector3(0, 2, 0);
+            childObject.transform.localRotation = Quaternion.identity;
+            childObject.transform.localScale = new Vector3(1, 1, 1);
         }
 
     }
