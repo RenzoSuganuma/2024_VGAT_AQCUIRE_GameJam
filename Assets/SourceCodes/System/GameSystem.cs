@@ -84,6 +84,7 @@ public sealed class GameSystem : MonoBehaviour
         }
 
         StartCoroutine(nameof(StartCountDown), 3f);
+        gameObject.AddComponent<AudioSource>();
     }
 
     private void Update()
