@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class TitleSystem : MonoBehaviour
 {
     [SerializeField] GameObject CreditPanel;
+    [SerializeField] Button CreditExit;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,13 +20,17 @@ public class TitleSystem : MonoBehaviour
         
     }
 
-   
+    
     public void ActivatePanel()
     {
         CreditPanel.SetActive(true);
     }
 
-    public void OuitGame()
+    public void DeactivatePanel()
+    {
+        CreditPanel.SetActive(false);
+    }
+    public void QuitGame()
     {
         UnityEditor.EditorApplication.isPlaying = false;
 

@@ -1,9 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+
+/// 最初のよーいどんの実装
+/// ゲームオーバーの実装
 
 /// <summary>
 ///  ゲームシステムクラス
@@ -15,6 +19,13 @@ public sealed class GameSystem : MonoBehaviour
 
     [SerializeField, Header("速度の最大値 [m/s]")]
     private float _maxVelocity = 10.0f;
+
+    [SerializeField, Header("ゲームオーバーのイベント")]
+    private UnityEvent _eventOnGO;
+
+    private static GameSystem _instance;
+
+    public static GameSystem Instance => _instance;
 
     /// <summary>
     /// ポーズ入力が入ったときに呼び出してほしいメソッドはここ
@@ -30,13 +41,6 @@ public sealed class GameSystem : MonoBehaviour
 
     public bool IsPausing => _isPausing;
 
-    private bool _isJumping = false;
-
-    /// <summary>
-    /// ジャンプ入力 【トリガー】
-    /// </summary>
-    public bool IsJumping => _isJumping;
-
     private float _velocity = 1.0f;
 
     /// <summary>
@@ -46,26 +50,48 @@ public sealed class GameSystem : MonoBehaviour
 
     private float _elapsedTime = 0f;
 
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+    static void Init()
+    {
+        _instance = null;
+    }
+
     private void Awake()
     {
+        if (_instance is null)
+        {
+            _instance = this;
+            this.gameObject.name = this.gameObject.name + " 【Saved Instance】 ";
+            // Debug.Log($"instance {_instance == this}");
+        }
         // DDOL 登録
         GameObject.DontDestroyOnLoad(this.gameObject);
     }
 
     private void Start()
     {
+        var instanceArray = GameObject.FindObjectsOfType<GameSystem>();
+        if (instanceArray.Length > 1)
+        {
+            foreach (var item in instanceArray)
+            {
+                if (item != _instance)
+                {
+                    Destroy(item.gameObject);
+                }
+            }
+        }
     }
 
     private void Update()
     {
         CheckPauseInput();
         GetPlayerVelocity();
-        _isJumping = Input.GetKeyDown(KeyCode.Space);
     }
 
     private void CheckPauseInput()
     {
-        if (Input.GetKeyDown(KeyCode.Tab)) // 仮の一時停止キー
+        if (Input.GetButtonDown("PauseResume")) // 仮の一時停止キー
         {
             _isPausing = !_isPausing;
             if (_isPausing)
@@ -107,15 +133,18 @@ public sealed class GameSystem : MonoBehaviour
     {
         var scene = SceneManager.GetActiveScene();
         SceneManager.MoveGameObjectToScene(this.gameObject, scene);
+        GameObject.Destroy(this.gameObject);
     }
 
     /// <summary>
     /// 次のシーンを読み込む
     /// </summary>
-    /// <param name="scene"></param>
-    public void LoadNextScene(Scene scene)
+    public void LoadNextScene()
     {
-        switch (scene.name)
+        var scene = SceneManager.GetActiveScene();
+        var sceneName = scene.name;
+
+        switch (sceneName)
         {
             case "TitleScene":
                 SceneManager.LoadScene("TutorialScene", LoadSceneMode.Single);
