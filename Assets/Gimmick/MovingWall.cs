@@ -19,6 +19,7 @@ public class MovingWall : MonoBehaviour
 
     [SerializeField, Header("壁の動く速度")] float _Speed = 5f;
     GameSystem _gameSystem;
+
     private Vector3 _destructionPos;
 
     // Start is called before the first frame update
