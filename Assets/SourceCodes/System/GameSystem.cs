@@ -108,4 +108,27 @@ public sealed class GameSystem : MonoBehaviour
         var scene = SceneManager.GetActiveScene();
         SceneManager.MoveGameObjectToScene(this.gameObject, scene);
     }
+
+    /// <summary>
+    /// 次のシーンを読み込む
+    /// </summary>
+    /// <param name="scene"></param>
+    public void LoadNextScene(Scene scene)
+    {
+        switch (scene.name)
+        {
+            case "TitleScene":
+                SceneManager.LoadScene("TutorialScene", LoadSceneMode.Single);
+                break;
+            case "TutorialScene":
+                SceneManager.LoadScene("MainScene", LoadSceneMode.Single);
+                break;
+            case "MainScene":
+                SceneManager.LoadScene("ResultScene", LoadSceneMode.Single);
+                break;
+            case "ResultScene":
+                SceneManager.LoadScene("TitleScene", LoadSceneMode.Single);
+                break;
+        }
+    }
 }
