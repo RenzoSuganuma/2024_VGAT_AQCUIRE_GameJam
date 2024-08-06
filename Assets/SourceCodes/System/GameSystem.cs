@@ -41,13 +41,6 @@ public sealed class GameSystem : MonoBehaviour
 
     public bool IsPausing => _isPausing;
 
-    private bool _isJumping = false;
-
-    /// <summary>
-    /// ジャンプ入力 【トリガー】
-    /// </summary>
-    public bool IsJumping => _isJumping;
-
     private float _velocity = 1.0f;
 
     /// <summary>
@@ -94,7 +87,6 @@ public sealed class GameSystem : MonoBehaviour
     {
         CheckPauseInput();
         GetPlayerVelocity();
-        _isJumping = Input.GetButtonDown("Jump");
     }
 
     private void CheckPauseInput()
