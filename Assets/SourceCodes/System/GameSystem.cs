@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -107,15 +106,18 @@ public sealed class GameSystem : MonoBehaviour
     {
         var scene = SceneManager.GetActiveScene();
         SceneManager.MoveGameObjectToScene(this.gameObject, scene);
+        GameObject.Destroy(this.gameObject);
     }
 
     /// <summary>
     /// 次のシーンを読み込む
     /// </summary>
-    /// <param name="scene"></param>
-    public void LoadNextScene(Scene scene)
+    public void LoadNextScene()
     {
-        switch (scene.name)
+        var scene = SceneManager.GetActiveScene();
+        var sceneName = scene.name;
+
+        switch (sceneName)
         {
             case "TitleScene":
                 SceneManager.LoadScene("TutorialScene", LoadSceneMode.Single);
