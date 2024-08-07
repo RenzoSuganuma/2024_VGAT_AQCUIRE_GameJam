@@ -755,7 +755,7 @@ PrefabInstance:
     - target: {fileID: 8250629079246443247, guid: fa9d246d55494604ba36483388898633,
         type: 3}
       propertyPath: _gravityDecay
-      value: 10
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 8250629079246443247, guid: fa9d246d55494604ba36483388898633,
         type: 3}
