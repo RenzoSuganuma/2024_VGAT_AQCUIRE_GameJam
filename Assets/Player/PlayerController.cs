@@ -22,8 +22,8 @@ public sealed class PlayerController : MonoBehaviour
     [SerializeField, Header(" 落下中の重力の減衰係数。大きければ減衰量が大きくなる ")]
     private float _gravityDecay;
 
-    [SerializeField, Header(" 落下中の重力の減衰係数。大きければ減衰量が大きくなる(跳ぶとき)")]
-    private float _jumpGravityDecay = 5f;
+    //[SerializeField, Header(" 落下中の重力の減衰係数。大きければ減衰量が大きくなる(跳ぶとき)")]
+    //private float _jumpGravityDecay = 5f;
 
     // ギミックから
     [SerializeField, Header("飛ぶときにアウトな壁のタグ")]
@@ -112,28 +112,12 @@ public sealed class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        //SeitchPlayerMovement();
-        // ポーズ中は入力を受け付けない
-        //if (_gameSystem.IsPausing)
-        //{
-        //    _rb.constraints = RigidbodyConstraints.FreezeAll;
-        //}
-        //else
-        //{
-        // _isKeyDown = Input.GetKeyDown(KeyCode.Space);
-        // _isKeyUp = Input.GetKeyUp(KeyCode.Space);
-        // InputJump();
-        //}
         if (!_gameSystem.IsPausing)
         {
-            _isKeyDown = Input.GetKey(KeyCode.Space);
-            _isKeyUp = Input.GetKeyUp(KeyCode.Space);
+            _isKeyDown = Input.GetButtonDown("Jump");
+            _isKeyUp = Input.GetButtonUp("Jump");
+            _isKey = Input.GetButton("Jump");
             InputJump();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Debug.Log("Update:Down");
         }
     }
 
@@ -156,14 +140,10 @@ public sealed class PlayerController : MonoBehaviour
     /// </summary>
     private void FlyPlayerMove()
     {
-        if (_isKey)
+        if (_isKeyDown)
         {
             Debug.Log("F");
             _rb.velocity = new Vector3(0, _flyPower, 0);
-        }
-
-        if (_isKeyDown)
-        {
             _audioSource.PlayOneShot(_flyAudioClip);
         }
     }
