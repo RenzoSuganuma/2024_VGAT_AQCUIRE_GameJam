@@ -1519,6 +1519,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3380743114651161904, guid: 250c9be2f22776845a8ce17df3c35b52,
+        type: 3}
+      propertyPath: _GroundLightIntensity
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 4148058520577379920, guid: 250c9be2f22776845a8ce17df3c35b52,
         type: 3}
       propertyPath: m_Name
