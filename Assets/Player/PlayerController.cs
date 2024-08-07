@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -24,6 +22,9 @@ public sealed class PlayerController : MonoBehaviour
     [SerializeField, Header(" 落下中の重力の減衰係数。大きければ減衰量が大きくなる ")]
     private float _gravityDecay;
 
+    [SerializeField, Header(" 落下中の重力の減衰係数。大きければ減衰量が大きくなる(跳ぶとき)")]
+    private float _jumpGravityDecay = 5f;
+
     // ギミックから
     [SerializeField, Header("飛ぶときにアウトな壁のタグ")]
     private string _flyGOTag = "";
@@ -42,6 +43,7 @@ public sealed class PlayerController : MonoBehaviour
     private Rigidbody _rb;
     private GameSystem _gameSystem;
     private Animator _animator;
+    private Renderer _renderer;
     private bool _isGrounded = false;
     private bool _canJump = false;
     private bool _isInputJump = false;
@@ -58,6 +60,7 @@ public sealed class PlayerController : MonoBehaviour
         _gameSystem = GameObject.FindObjectOfType<GameSystem>().GetComponent<GameSystem>();
         _audioSource = GetComponent<AudioSource>();
         _animator = GetComponentInChildren<Animator>();
+        _renderer = GetComponentInChildren<Renderer>();
         // ランダムに飛ぶと跳ぶを変更
         StartCoroutine("ChangePlayerMoveState");
         if (_flyGOTag is null || _jumpGOTag is null)
@@ -68,6 +71,7 @@ public sealed class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        ColorChange();
         //Debug.Log($"接地：{_isGrounded}");
         //Debug.Log(_currentMoveState);
         //Debug.Log(_gameSystem.IsPausing);
@@ -76,12 +80,13 @@ public sealed class PlayerController : MonoBehaviour
             Debug.Log("ゲームシステムがnullです");
         }
 
-        PlayerMove();
+        //SeitchPlayerMovement();
         // ポーズしていない時動ける
         if (_gameSystem is not null && !_gameSystem.IsPausing)
         {
-            PlayerMove();
+            SeitchPlayerMovement();
             _rb.constraints = RigidbodyConstraints.None;
+            _rb.constraints = RigidbodyConstraints.FreezeRotation;
         }
         else
         {
@@ -108,6 +113,7 @@ public sealed class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        //SeitchPlayerMovement();
         // ポーズ中は入力を受け付けない
         //if (_gameSystem.IsPausing)
         //{
@@ -132,7 +138,8 @@ public sealed class PlayerController : MonoBehaviour
         }
     }
 
-    private void PlayerMove()
+    
+    private void SeitchPlayerMovement()
     {
         switch (CurrentMoveState)
         {
@@ -207,6 +214,21 @@ public sealed class PlayerController : MonoBehaviour
     {
         _gameSystem.NotifyPlayerIsDeath();
         _audioSource.PlayOneShot(_clashAudioClip);
+    }
+
+    /// <summary>
+    /// 状態に合わせて色を変える
+    /// </summary>
+    private void ColorChange()
+    {
+        if (_currentMoveState == PlayerMoveState.Fly)
+        {
+            _renderer.material.color = Color.magenta;
+        }
+        else if (_currentMoveState == PlayerMoveState.Jump)
+        {
+            _renderer.material.color = Color.yellow;
+        }
     }
 
     /// <summary>
