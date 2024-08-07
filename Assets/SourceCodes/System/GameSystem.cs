@@ -47,6 +47,8 @@ public sealed class GameSystem : MonoBehaviour
     private Vector3 _playerStartPoint;
     private Vector3 _playerEndPoint;
 
+    private Sprite _imgJump, _imgFly;
+
     /// <summary>
     /// 速度ベクトルの大きさ
     /// </summary>
@@ -78,6 +80,9 @@ public sealed class GameSystem : MonoBehaviour
         {
             _playerStartPoint = player.transform.position;
         }
+        
+        _imgFly = Resources.Load<Sprite>("Images/icon_fly");
+        _imgJump = Resources.Load<Sprite>("Images/icon_jump");
     }
 
     public void OnPlayerStateChanges()
@@ -87,10 +92,10 @@ public sealed class GameSystem : MonoBehaviour
         switch (state)
         {
             case PlayerMoveState.Fly:
-                img.sprite = Resources.Load<Sprite>("Images/icon_fly");
+                img.sprite = _imgFly;
                 break;
             case PlayerMoveState.Jump:
-                img.sprite = Resources.Load<Sprite>("Images/icon_jump");
+                img.sprite = _imgJump;
                 break;
         }
     }
