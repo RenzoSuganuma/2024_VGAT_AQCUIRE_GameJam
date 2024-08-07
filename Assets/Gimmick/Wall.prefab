@@ -396,7 +396,7 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 0.015249968, g: 1, b: 0, a: 1}
-  m_Intensity: 33.5
+  m_Intensity: 15
   m_Range: 4.35
   m_SpotAngle: 36.404293
   m_InnerSpotAngle: 36.404293
@@ -482,7 +482,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _AreaLight: {fileID: 8600675733099585962}
-  _WallLightIntensity: 5
+  _WallLightIntensity: 1
 --- !u!1 &9128262389623633106
 GameObject:
   m_ObjectHideFlags: 0
