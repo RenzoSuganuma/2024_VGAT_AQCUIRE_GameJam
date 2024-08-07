@@ -74,27 +74,21 @@ public sealed class GameSystem : MonoBehaviour
         if (player is not null)
         {
             _playerStartPoint = player.transform.position;
-
-            var sr = GameObject.Find("PlayerStateImage").GetComponent< SpriteRenderer >();
-
-            player.OnPlayerStateChange += OnStateChanged(sr);  // 関数を登録
         }
     }
 
-    private static Action<PlayerMoveState> OnStateChanged(SpriteRenderer sr)
-    {
-        return (state) =>
+    public void OnPlayerStateChanges(){
+        var img = GameObject.Find("PlayerStateImage").GetComponent<Image>();
+        var state = GameObject.FindAnyObjectByType<PlayerController>().CurrentMoveState;
+        switch (state)
         {
-            switch (state)
-            {
-                case PlayerMoveState.Fly:
-                    sr.sprite = Resources.Load<Sprite>("Images/icon_fly");
-                    break;
-                case PlayerMoveState.Jump:
-                    sr.sprite = Resources.Load<Sprite>("Images/icon_jump");
-                    break;
-            }   
-        };
+            case PlayerMoveState.Fly:
+                img.sprite = Resources.Load<Sprite>("Images/icon_fly");
+                break;
+            case PlayerMoveState.Jump:
+                img.sprite = Resources.Load<Sprite>("Images/icon_jump");
+                break;
+        }
     }
 
     private void SetupBackGroundAudio()
@@ -157,6 +151,10 @@ public sealed class GameSystem : MonoBehaviour
     private void FixedUpdate()
     {
         _elapsedTime += Time.fixedDeltaTime;
+    }
+
+    private void OnDisable()
+    {
     }
 
     private void GetPlayerVelocity()
@@ -253,9 +251,4 @@ public sealed class GameSystem : MonoBehaviour
         yield return new WaitForSeconds(1);
         GameObject.FindAnyObjectByType<SceneLoader>().LoadScene("ResultScene");
     }
-}
-
-public interface IPlayerStateGettable
-{
-    public event Action<PlayerMoveState> OnPlayerStateChange;
 }
