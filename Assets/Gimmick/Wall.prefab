@@ -361,6 +361,7 @@ GameObject:
   - component: {fileID: 7167744969993687277}
   - component: {fileID: 4830131904495673050}
   - component: {fileID: 7346035773789286070}
+  - component: {fileID: 8349818513676590974}
   m_Layer: 0
   m_Name: Spot Light
   m_TagString: Untagged
@@ -376,13 +377,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8600675733099585962}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.5735764, y: 0, z: 0, w: 0.8191521}
-  m_LocalPosition: {x: -0.004459381, y: 0.4, z: -0.85}
+  m_LocalRotation: {x: 0.42261827, y: 0, z: 0, w: 0.9063079}
+  m_LocalPosition: {x: 0, y: 0, z: -1.78}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2974319160927294255}
-  m_LocalEulerAnglesHint: {x: 70, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 50, y: 0, z: 0}
 --- !u!108 &4830131904495673050
 Light:
   m_ObjectHideFlags: 0
@@ -395,7 +396,7 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 6
+  m_Intensity: 5
   m_Range: 4.35
   m_SpotAngle: 36.404293
   m_InnerSpotAngle: 36.404293
@@ -468,6 +469,19 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!114 &8349818513676590974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8600675733099585962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1f9627970852c9469756468db6ad8b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _AreaLight: {fileID: 8600675733099585962}
 --- !u!1 &9128262389623633106
 GameObject:
   m_ObjectHideFlags: 0
