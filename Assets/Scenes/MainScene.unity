@@ -1123,10 +1123,25 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 6171955869055417950, guid: fa9d246d55494604ba36483388898633,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7456794521049731433, guid: fa9d246d55494604ba36483388898633,
         type: 3}
       propertyPath: m_Layer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8250629079246443247, guid: fa9d246d55494604ba36483388898633,
+        type: 3}
+      propertyPath: _y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8250629079246443247, guid: fa9d246d55494604ba36483388898633,
+        type: 3}
+      propertyPath: _jumpGravity
+      value: -30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
