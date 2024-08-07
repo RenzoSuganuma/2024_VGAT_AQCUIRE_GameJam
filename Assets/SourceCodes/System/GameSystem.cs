@@ -24,6 +24,8 @@ public sealed class GameSystem : MonoBehaviour
     [SerializeField, Header("ゲームオーバーのイベント")]
     private UnityEvent _eventOnGO;
 
+    [SerializeField] private GameObject _playerDeathParticle;
+
     public float MaxVelocity => _maxVelocity;
 
     /// <summary>
@@ -78,7 +80,8 @@ public sealed class GameSystem : MonoBehaviour
         }
     }
 
-    public void OnPlayerStateChanges(){
+    public void OnPlayerStateChanges()
+    {
         var img = GameObject.Find("PlayerStateImage").GetComponent<Image>();
         var state = GameObject.FindAnyObjectByType<PlayerController>().CurrentMoveState;
         switch (state)
@@ -241,6 +244,8 @@ public sealed class GameSystem : MonoBehaviour
         if (player is not null)
         {
             _playerEndPoint = player.transform.position;
+            var part = GameObject.Instantiate(_playerDeathParticle, player.transform.position,
+                player.transform.rotation, player.transform);
         }
 
         var cam = Camera.main;
