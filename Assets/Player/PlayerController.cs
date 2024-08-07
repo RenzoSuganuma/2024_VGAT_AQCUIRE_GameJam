@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public sealed class PlayerController : MonoBehaviour
+public sealed class PlayerController : MonoBehaviour , IPlayerStateGettable
 {
     [SerializeField, Header("飛ぶときに加える力")] private float _flyPower = 5f;
     [SerializeField, Header("跳ぶときに加える力")] private float _jumpPower = 0.5f;
@@ -23,6 +23,8 @@ public sealed class PlayerController : MonoBehaviour
     [SerializeField] private AudioClip _jumpAudioClip;
     [SerializeField] private AudioClip _clashAudioClip;
     [SerializeField] private AudioClip _changeAudioClip;
+    
+    public event Action<PlayerMoveState> OnPlayerStateChange;
     
     private Rigidbody _rb;
     private GameSystem _gameSystem;
@@ -243,4 +245,5 @@ public sealed class PlayerController : MonoBehaviour
             yield return new WaitForSeconds(_time);
         }
     }
+
 }
