@@ -25,6 +25,13 @@ public sealed class PlayerController : MonoBehaviour
     //[SerializeField, Header(" 落下中の重力の減衰係数。大きければ減衰量が大きくなる(跳ぶとき)")]
     //private float _jumpGravityDecay = 5f;
 
+    // レベルデザイン用
+    [SerializeField, Header("飛ぶときの重力")]
+    private float _flyGravity = -9.81f;
+
+    [SerializeField, Header("跳ぶときの重力")]
+    private float _jumpGravity = -9.81f;
+
     // ギミックから
     [SerializeField, Header("飛ぶときにアウトな壁のタグ")]
     private string _flyGOTag = "";
@@ -84,7 +91,14 @@ public sealed class PlayerController : MonoBehaviour
         // ポーズしていない時動ける
         if (_gameSystem is not null && !_gameSystem.IsPausing)
         {
-            SeitchPlayerMovement();
+            //SeitchPlayerMovement();
+            // 跳ぶ
+            // Updateに"飛ぶ"の処理
+            if (_currentMoveState == PlayerMoveState.Jump)
+            {
+                Physics.gravity = new Vector3(0, _jumpGravity, 0);
+                JumpPlayerMove();
+            }
             _rb.constraints = RigidbodyConstraints.None;
             _rb.constraints = RigidbodyConstraints.FreezeRotation;
         }
@@ -119,6 +133,17 @@ public sealed class PlayerController : MonoBehaviour
             _isKey = Input.GetButton("Jump");
             InputJump();
         }
+        
+        if (_gameSystem is not null && !_gameSystem.IsPausing)
+        {
+            // 飛ぶ
+            // FixedUpdateに"跳ぶ"の処理
+            if (_currentMoveState == PlayerMoveState.Fly)
+            {
+                Physics.gravity = new Vector3(0, _flyGravity, 0);
+                FlyPlayerMove();
+            }
+        }
     }
 
     
@@ -127,9 +152,11 @@ public sealed class PlayerController : MonoBehaviour
         switch (CurrentMoveState)
         {
             case PlayerMoveState.Fly:
+                Physics.gravity = new Vector3(0, _flyGravity, 0);
                 FlyPlayerMove();
                 break;
             case PlayerMoveState.Jump:
+                Physics.gravity = new Vector3(0, _jumpGravity, 0);
                 JumpPlayerMove();
                 break;
         }
@@ -153,6 +180,7 @@ public sealed class PlayerController : MonoBehaviour
     /// </summary>
     private void JumpPlayerMove()
     {
+        // 力を加える高さに制限を付ける
         if (_isInputJump && transform.position.y < _y)
         {
             _canJump = true;
