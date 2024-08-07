@@ -12,8 +12,7 @@ using UnityEngine.UI;
 /// </summary>
 public sealed class GameSystem : MonoBehaviour
 {
-    [SerializeField, Header("開始時の速度")]
-    private float _startVelo = 1.0f;
+    [SerializeField, Header("開始時の速度")] private float _startVelo = 1.0f;
 
     [SerializeField, Header("加速度 [m/s^2]")]
     private float _acceleration = 1.0f;
@@ -75,7 +74,27 @@ public sealed class GameSystem : MonoBehaviour
         if (player is not null)
         {
             _playerStartPoint = player.transform.position;
+
+            var sr = GameObject.Find("PlayerStateImage").GetComponent< SpriteRenderer >();
+
+            player.OnPlayerStateChange += OnStateChanged(sr);  // 関数を登録
         }
+    }
+
+    private static Action<PlayerMoveState> OnStateChanged(SpriteRenderer sr)
+    {
+        return (state) =>
+        {
+            switch (state)
+            {
+                case PlayerMoveState.Fly:
+                    sr.sprite = Resources.Load<Sprite>("Images/icon_fly");
+                    break;
+                case PlayerMoveState.Jump:
+                    sr.sprite = Resources.Load<Sprite>("Images/icon_jump");
+                    break;
+            }   
+        };
     }
 
     private void SetupBackGroundAudio()
@@ -96,7 +115,10 @@ public sealed class GameSystem : MonoBehaviour
 
         var speedMeter = GameObject.Find("SpeedMeter");
         if (speedMeter is not null)
-        { speedMeter.GetComponent<Text>().text = _velocity.ToString("F2") + " km/h"; }
+        {
+            speedMeter.GetComponent<Text>().text = _velocity.ToString("F2") + " km/h";
+        }
+
         var player = GameObject.FindAnyObjectByType<PlayerController>();
         if (player is not null)
         {
@@ -105,7 +127,9 @@ public sealed class GameSystem : MonoBehaviour
 
             var dis = GameObject.Find("DistanceMeter");
             if (dis is not null)
-            { dis.GetComponent<Text>().text = str + " m"; }
+            {
+                dis.GetComponent<Text>().text = str + " m";
+            }
 
             PlayerScore = str;
         }
@@ -115,13 +139,17 @@ public sealed class GameSystem : MonoBehaviour
     {
         var text = GameObject.Find("GameStateText");
         if (text is not null)
-        { text.GetComponent<Text>().text = "Press SPACE to Start"; }
+        {
+            text.GetComponent<Text>().text = "Press SPACE to Start";
+        }
 
         // Spaceが押されるまで待機する
         yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
 
         if (text is not null)
-        { text.GetComponent<Text>().text = ""; }
+        {
+            text.GetComponent<Text>().text = "";
+        }
 
         _isPausing = false;
     }
@@ -206,7 +234,9 @@ public sealed class GameSystem : MonoBehaviour
 
         var text = GameObject.Find("GameStateText");
         if (text is not null)
-        { text.GetComponent<Text>().text = "GAME OVER !!"; }
+        {
+            text.GetComponent<Text>().text = "GAME OVER !!";
+        }
 
         var player = GameObject.FindAnyObjectByType<PlayerController>();
         if (player is not null)
