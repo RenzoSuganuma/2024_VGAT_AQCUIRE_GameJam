@@ -14,7 +14,8 @@ public class WallPairInstantiator : MonoBehaviour
         if (_GameSystem is not null && !_GameSystem.IsPausing)
         {
             int UpperWallRandom = Random.Range(0, _UpperWall.Length - 1);
-            int UnderWallRandom = Random.Range(0, _UnderWall.Length - 1);            _UpperWall[UpperWallRandom].SetActive(true);
+            int UnderWallRandom = Random.Range(0, _UnderWall.Length - 1);  
+            _UpperWall[UpperWallRandom].SetActive(true);
             _UnderWall[UnderWallRandom].SetActive(true);
         }
     }
