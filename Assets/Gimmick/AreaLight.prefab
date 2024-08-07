@@ -45,7 +45,7 @@ Light:
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
-  m_Color: {r: 0.39587474, g: 1, b: 0, a: 1}
+  m_Color: {r: 0.98197967, g: 1, b: 0.2584905, a: 1}
   m_Intensity: 400
   m_Range: 38
   m_SpotAngle: 179
@@ -83,7 +83,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 64
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
@@ -132,4 +132,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _AreaLight: {fileID: 4148058520577379920}
-  _GroundLightIntensity: 558.4

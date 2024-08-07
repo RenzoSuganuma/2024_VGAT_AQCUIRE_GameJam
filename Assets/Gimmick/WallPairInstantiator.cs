@@ -17,7 +17,6 @@ public class WallPairInstantiator : MonoBehaviour
             int UnderWallRandom = Random.Range(0, _UnderWall.Length - 1);  
             _UpperWall[UpperWallRandom].SetActive(true);
             _UnderWall[UnderWallRandom].SetActive(true);
-            Debug.Log("1");
         }
     }
 }
