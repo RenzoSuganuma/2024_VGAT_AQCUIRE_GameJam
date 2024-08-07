@@ -482,7 +482,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _AreaLight: {fileID: 8600675733099585962}
-  _WallLightIntensity: 5
 --- !u!1 &9128262389623633106
 GameObject:
   m_ObjectHideFlags: 0
@@ -848,7 +847,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 7ab06eff8d3e56c4f87039e0015103f9,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1023,7 +1022,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 7ab06eff8d3e56c4f87039e0015103f9,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
