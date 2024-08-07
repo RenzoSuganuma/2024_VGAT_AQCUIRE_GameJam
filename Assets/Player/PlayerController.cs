@@ -47,6 +47,7 @@ public sealed class PlayerController : MonoBehaviour
     private bool _isInputJump = false;
     private bool _isKeyDown = false;
     private bool _isKeyUp = false;
+    private bool _isjumping = false;
 
     public PlayerMoveState CurrentMoveState => _currentMoveState;
 
@@ -120,9 +121,14 @@ public sealed class PlayerController : MonoBehaviour
         //}
         if (!_gameSystem.IsPausing)
         {
-            _isKeyDown = Input.GetKeyDown(KeyCode.Space);
+            _isKeyDown = Input.GetKey(KeyCode.Space);
             _isKeyUp = Input.GetKeyUp(KeyCode.Space);
             InputJump();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("Update:Down");
         }
     }
 
@@ -146,7 +152,7 @@ public sealed class PlayerController : MonoBehaviour
     {
         if (_isKeyDown)
         {
-            //Debug.Log("F");
+            Debug.Log("F");
             _rb.velocity = new Vector3(0, _flyPower, 0);
             _audioSource.PlayOneShot(_flyAudioClip);
         }
@@ -256,6 +262,8 @@ public sealed class PlayerController : MonoBehaviour
     {
         while (true)
         {
+            yield return new WaitUntil(() => _gameSystem.IsPausing == false);   // ポーズ解除でコルーチン再開
+            
             _animator.SetBool("ChangeBefore", false);
             _audioSource.Stop();
             _currentMoveState = PlayerMoveState.Fly;
