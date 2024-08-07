@@ -80,6 +80,11 @@ public sealed class PlayerController : MonoBehaviour
         if (_gameSystem is not null && !_gameSystem.IsPausing)
         {
             PlayerMove();
+            _rb.constraints = RigidbodyConstraints.None;
+        }
+        else
+        {
+            _rb.constraints = RigidbodyConstraints.FreezeAll;
         }
 
         GravityDecay();
