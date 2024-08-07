@@ -14,6 +14,19 @@ public class WallSafeAreaLight : MonoBehaviour
         _Light = GetComponent<Light>();
         _PlayerState = GameObject.FindAnyObjectByType<PlayerController>();
 
+        //if (_PlayerState.CurrentMoveState == PlayerMoveState.Fly)
+        //{
+        //    _Light.intensity = 0;
+        //}
+        //else if (_PlayerState.CurrentMoveState == PlayerMoveState.Jump)
+        //{
+        //    _Light.intensity = _WallLightIntensity;
+        //}
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         if (_PlayerState.CurrentMoveState == PlayerMoveState.Fly)
         {
             _Light.intensity = 0;
@@ -22,18 +35,5 @@ public class WallSafeAreaLight : MonoBehaviour
         {
             _Light.intensity = _WallLightIntensity;
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-    //    if (_PlayerState.CurrentMoveState == PlayerMoveState.Fly)
-    //    {
-    //        _Light.intensity = 0;
-    //    }
-    //    else if (_PlayerState.CurrentMoveState == PlayerMoveState.Jump)
-    //    {
-    //        _Light.intensity = 400;
-    //    }
     }
 }
