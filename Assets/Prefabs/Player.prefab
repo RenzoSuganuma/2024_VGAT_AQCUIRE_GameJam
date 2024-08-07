@@ -98,13 +98,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _flyPower: 5
   _jumpPower: 1.5
-  _currentMoveState: 0
+  _currentMoveState: 1
   _minChangeTime: 3
   _maxChangeTime: 10
   _y: 0.5
   _time: 2
+  _gravityDecay: 100
   _flyGOTag: FlyCollider
   _jumpGOTag: JumpCollider
+  _groundTag: Ground
   _audioSource: {fileID: 1559021537723657700}
   _flyAudioClip: {fileID: 8300000, guid: 6cea0d7e83a908a4991d831a84c1f6a9, type: 3}
   _jumpAudioClip: {fileID: 8300000, guid: 6dd98b6fee5f4e24aa31458f1acf3c75, type: 3}
