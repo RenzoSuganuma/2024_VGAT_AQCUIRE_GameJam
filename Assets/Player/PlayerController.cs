@@ -100,6 +100,7 @@ public sealed class PlayerController : MonoBehaviour
     {
         if (_rb.velocity.y < 0)
         {
+            Debug.Log("落下中");
             var v = _rb.velocity;
             if (v.y < 0f)
             {
