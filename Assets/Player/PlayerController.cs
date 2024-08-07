@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public sealed class PlayerController : MonoBehaviour , IPlayerStateGettable
+public sealed class PlayerController : MonoBehaviour
 {
     [SerializeField, Header("飛ぶときに加える力")] private float _flyPower = 5f;
     [SerializeField, Header("跳ぶときに加える力")] private float _jumpPower = 0.5f;
@@ -23,8 +23,6 @@ public sealed class PlayerController : MonoBehaviour , IPlayerStateGettable
     [SerializeField] private AudioClip _jumpAudioClip;
     [SerializeField] private AudioClip _clashAudioClip;
     [SerializeField] private AudioClip _changeAudioClip;
-    
-    public event Action<PlayerMoveState> OnPlayerStateChange;
     
     private Rigidbody _rb;
     private GameSystem _gameSystem;
@@ -225,9 +223,10 @@ public sealed class PlayerController : MonoBehaviour , IPlayerStateGettable
             _animator.SetBool("ChangeBefore", false);
             _audioSource.Stop();
             _currentMoveState = PlayerMoveState.Fly;
+            
             Debug.Log("Flyに変更");
             yield return new WaitForSeconds(Random.Range(_minChangeTime, _maxChangeTime - _time));
-            
+            _gameSystem.OnPlayerStateChanges();
             _animator.SetBool("ChangeBefore", true);
             _audioSource.PlayOneShot(_changeAudioClip);
             Debug.Log($"{_time}秒後に状態をJumpに切り替えます");
@@ -236,6 +235,7 @@ public sealed class PlayerController : MonoBehaviour , IPlayerStateGettable
             _animator.SetBool("ChangeBefore", false);
             _audioSource.Stop();
             _currentMoveState = PlayerMoveState.Jump;
+            _gameSystem.OnPlayerStateChanges();
             Debug.Log("Jumpに変更");
             yield return new WaitForSeconds(Random.Range(_minChangeTime, _maxChangeTime - _time));
             
