@@ -119,7 +119,7 @@ public sealed class GameSystem : MonoBehaviour
         var speedMeter = GameObject.Find("SpeedMeter");
         if (speedMeter is not null)
         {
-            speedMeter.GetComponent<Text>().text = _velocity.ToString("F2") + " km/h";
+            speedMeter.GetComponent<Text>().text = _velocity.ToString("F2") + " \nkm/h";
         }
 
         var player = GameObject.FindAnyObjectByType<PlayerController>();
