@@ -49,7 +49,7 @@ public sealed class PlayerController : MonoBehaviour
     private bool _isInputJump = false;
     private bool _isKeyDown = false;
     private bool _isKeyUp = false;
-    private bool _isjumping = false;
+    private bool _isKey = false;
 
     public PlayerMoveState CurrentMoveState => _currentMoveState;
 
@@ -157,10 +157,14 @@ public sealed class PlayerController : MonoBehaviour
     /// </summary>
     private void FlyPlayerMove()
     {
-        if (_isKeyDown)
+        if (_isKey)
         {
             Debug.Log("F");
             _rb.velocity = new Vector3(0, _flyPower, 0);
+        }
+
+        if (_isKeyDown)
+        {
             _audioSource.PlayOneShot(_flyAudioClip);
         }
     }
