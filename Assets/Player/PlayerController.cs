@@ -234,7 +234,8 @@ public sealed class PlayerController : MonoBehaviour
     {
         if (_currentMoveState == PlayerMoveState.Fly)
         {
-            _renderer.material.color = Color.magenta;
+            Color c = new Color(1, .5f, 1, 1);
+            _renderer.material.color = c;
         }
         else if (_currentMoveState == PlayerMoveState.Jump)
         {
