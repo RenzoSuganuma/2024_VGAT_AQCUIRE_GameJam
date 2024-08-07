@@ -49,7 +49,7 @@ public sealed class PlayerController : MonoBehaviour
     private bool _isInputJump = false;
     private bool _isKeyDown = false;
     private bool _isKeyUp = false;
-    private bool _isKey = false;
+    private bool _isjumping = false;
 
     public PlayerMoveState CurrentMoveState => _currentMoveState;
 
@@ -80,11 +80,11 @@ public sealed class PlayerController : MonoBehaviour
             Debug.Log("ゲームシステムがnullです");
         }
 
-        SwitchPlayerMovement();
+        //SeitchPlayerMovement();
         // ポーズしていない時動ける
         if (_gameSystem is not null && !_gameSystem.IsPausing)
         {
-            //SeitchPlayerMovement();
+            SeitchPlayerMovement();
             _rb.constraints = RigidbodyConstraints.None;
             _rb.constraints = RigidbodyConstraints.FreezeRotation;
         }
@@ -113,7 +113,7 @@ public sealed class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        //SwitchPlayerMovement();
+        //SeitchPlayerMovement();
         // ポーズ中は入力を受け付けない
         //if (_gameSystem.IsPausing)
         //{
@@ -127,9 +127,8 @@ public sealed class PlayerController : MonoBehaviour
         //}
         if (!_gameSystem.IsPausing)
         {
-            _isKeyDown = Input.GetKeyDown(KeyCode.Space);
+            _isKeyDown = Input.GetKey(KeyCode.Space);
             _isKeyUp = Input.GetKeyUp(KeyCode.Space);
-            _isKey = Input.GetKey(KeyCode.Space);
             InputJump();
         }
 
@@ -140,7 +139,7 @@ public sealed class PlayerController : MonoBehaviour
     }
 
     
-    private void SwitchPlayerMovement()
+    private void SeitchPlayerMovement()
     {
         switch (CurrentMoveState)
         {
@@ -158,15 +157,11 @@ public sealed class PlayerController : MonoBehaviour
     /// </summary>
     private void FlyPlayerMove()
     {
-        if (_isKey)
+        if (_isKeyDown)
         {
             Debug.Log("F");
             _rb.velocity = new Vector3(0, _flyPower, 0);
-        }
-
-        if (_isKeyDown)
-        {
-            _audioSource.PlayOneShot(_flyAudioClip);              
+            _audioSource.PlayOneShot(_flyAudioClip);
         }
     }
 
