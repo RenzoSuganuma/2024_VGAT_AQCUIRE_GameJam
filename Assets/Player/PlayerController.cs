@@ -100,6 +100,8 @@ public sealed class PlayerController : MonoBehaviour
                 JumpPlayerMove();
             }
             _rb.constraints = RigidbodyConstraints.None;
+            _rb.constraints = RigidbodyConstraints.FreezePositionX;
+            _rb.constraints = RigidbodyConstraints.FreezePositionZ;
             _rb.constraints = RigidbodyConstraints.FreezeRotation;
         }
         else
@@ -301,10 +303,10 @@ public sealed class PlayerController : MonoBehaviour
             _animator.SetBool("ChangeBefore", false);
             _audioSource.Stop();
             _currentMoveState = PlayerMoveState.Fly;
-
+            _gameSystem.OnPlayerStateChanges();
+            
             Debug.Log("Flyに変更");
             yield return new WaitForSeconds(Random.Range(_minChangeTime, _maxChangeTime - _time));
-            _gameSystem.OnPlayerStateChanges();
             _animator.SetBool("ChangeBefore", true);
             _audioSource.PlayOneShot(_changeAudioClip);
             Debug.Log($"{_time}秒後に状態をJumpに切り替えます");
