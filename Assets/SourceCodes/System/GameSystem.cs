@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
@@ -241,6 +242,9 @@ public sealed class GameSystem : MonoBehaviour
         {
             _playerEndPoint = player.transform.position;
         }
+
+        var cam = Camera.main;
+        cam.transform.transform.DOPunchPosition(Vector3.one - Vector3.forward, .5f);
 
         StartCoroutine(GotoResult());
     }
