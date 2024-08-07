@@ -124,6 +124,94 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &51811367
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 669112710961912704, guid: d0a26865c664412498c616478b5ecdb6,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 669112710961912704, guid: d0a26865c664412498c616478b5ecdb6,
+        type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 1210260197244625084, guid: d0a26865c664412498c616478b5ecdb6,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1210260197244625084, guid: d0a26865c664412498c616478b5ecdb6,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 1210260197244625084, guid: d0a26865c664412498c616478b5ecdb6,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -13.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 1210260197244625084, guid: d0a26865c664412498c616478b5ecdb6,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1210260197244625084, guid: d0a26865c664412498c616478b5ecdb6,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1210260197244625084, guid: d0a26865c664412498c616478b5ecdb6,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1210260197244625084, guid: d0a26865c664412498c616478b5ecdb6,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1210260197244625084, guid: d0a26865c664412498c616478b5ecdb6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1210260197244625084, guid: d0a26865c664412498c616478b5ecdb6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1210260197244625084, guid: d0a26865c664412498c616478b5ecdb6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4148058520577379920, guid: d0a26865c664412498c616478b5ecdb6,
+        type: 3}
+      propertyPath: m_Name
+      value: AreaLight
+      objectReference: {fileID: 0}
+    - target: {fileID: 4148058520577379920, guid: d0a26865c664412498c616478b5ecdb6,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4148058520577379920, guid: d0a26865c664412498c616478b5ecdb6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d0a26865c664412498c616478b5ecdb6, type: 3}
 --- !u!1 &149885994
 GameObject:
   m_ObjectHideFlags: 0
@@ -135,7 +223,7 @@ GameObject:
   - component: {fileID: 149885995}
   - component: {fileID: 149885997}
   - component: {fileID: 149885996}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obj_ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -217,7 +305,7 @@ GameObject:
   m_Component:
   - component: {fileID: 156360271}
   - component: {fileID: 156360270}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ground(Clone) (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -264,7 +352,7 @@ GameObject:
   m_Component:
   - component: {fileID: 190747772}
   - component: {fileID: 190747771}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ground(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -517,7 +605,7 @@ GameObject:
   - component: {fileID: 562814097}
   - component: {fileID: 562814099}
   - component: {fileID: 562814098}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obj_ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1577,3 +1665,4 @@ SceneRoots:
   - {fileID: 190747772}
   - {fileID: 156360271}
   - {fileID: 235665918}
+  - {fileID: 51811367}
