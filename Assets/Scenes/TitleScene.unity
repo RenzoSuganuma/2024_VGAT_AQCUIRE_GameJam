@@ -267,7 +267,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -175, y: -10}
+  m_AnchoredPosition: {x: 63, y: -64}
   m_SizeDelta: {x: 300, y: 430}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &294814998
@@ -303,7 +303,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u30D7\u30E9\u30F3\u30CA\u30FC\n\u3000\u30E8\u30A6 \u30A4\u30C4\u30E9\u30F3\n\u3000\u9752\u5C71
+  m_Text: "\u30D7\u30E9\u30F3\u30CA\u30FC\n\u30E8\u30A6 \u30A4\u30C4\u30E9\u30F3\n\u9752\u5C71
     \u7814\u4EBA"
 --- !u!222 &294814999
 CanvasRenderer:
@@ -347,7 +347,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -175, y: -165}
+  m_AnchoredPosition: {x: -174, y: -64}
   m_SizeDelta: {x: 300, y: 430}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &557084474
@@ -383,8 +383,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u30D7\u30ED\u30B0\u30E9\u30DE\u30FC\n\u3000\u83C5\u6CBC \u9023\u66FD\n\u3000\u67FF\u6CBC
-    \u67DA\u8475\n\u3000\u9AD8\u5D8B \u653F\u535A\n\u3000\u6D25\u5CF6 \u8AD2\u592A"
+  m_Text: "\u30D7\u30ED\u30B0\u30E9\u30DE\u30FC\n\u83C5\u6CBC \u9023\u66FD\n\u67FF\u6CBC
+    \u67DA\u8475\n\u9AD8\u5D8B \u653F\u535A\n\u6D25\u5CF6 \u8AD2\u592A"
 --- !u!222 &557084475
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2491,7 +2491,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 265, y: -10}
+  m_AnchoredPosition: {x: 307, y: -64}
   m_SizeDelta: {x: 300, y: 430}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2105438411
@@ -2527,8 +2527,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u30C7\u30B6\u30A4\u30CA\u30FC\n\u3000\u6625\u540D \u5B9F\u7802\n\u3000\u76F8\u5DDD
-    \u5948\u7A42\n\u3000\u4E0A\u539F \u7950\u592A\n\u3000\u89D2\u8C37 \u7F8E\u73B2\n\u3000\u91CE\u7530
+  m_Text: "\u30C7\u30B6\u30A4\u30CA\u30FC\n\u6625\u540D \u5B9F\u7802\n\u76F8\u5DDD
+    \u5948\u7A42\n\u4E0A\u539F \u7950\u592A\n\u89D2\u8C37 \u7F8E\u73B2\n\u91CE\u7530
     \u61B2\u543E"
 --- !u!222 &2105438412
 CanvasRenderer:
