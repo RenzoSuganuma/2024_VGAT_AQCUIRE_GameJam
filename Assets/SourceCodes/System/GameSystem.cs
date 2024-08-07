@@ -224,3 +224,8 @@ public sealed class GameSystem : MonoBehaviour
         GameObject.FindAnyObjectByType<SceneLoader>().LoadScene("ResultScene");
     }
 }
+
+public interface IPlayerStateGettable
+{
+    public event Action<PlayerMoveState> OnPlayerStateChange;
+}
